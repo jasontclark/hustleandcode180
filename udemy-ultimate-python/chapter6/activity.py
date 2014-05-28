@@ -1,18 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-message = 'The recommended activity is '
-print('Enter the temperature: ')
-temp = int(raw_input())
+""" activity.py - udemy chapter 6, exercise 2 """
 
-if temp > 85:
-  message = message + 'swimming.'
-elif temp >= 70:
-  message = message + 'tennis.'
-elif temp >= 32:
-  message = message + 'golf.'
-elif temp >= 0:
-  message = message + 'dancing.'
+MESSAGE = 'The recommended activity is '
+print 'Enter the temperature: '
+TEMP = int(raw_input())
+
+if TEMP > 85:
+    MESSAGE = MESSAGE + 'swimming.'
+elif TEMP >= 70:
+    MESSAGE = MESSAGE + 'tennis.'
+elif TEMP >= 32:
+    MESSAGE = MESSAGE + 'golf.'
+elif TEMP >= 0:
+    MESSAGE = MESSAGE + 'dancing.'
 else:
-  message = message + 'sitting by the fire.'
+    MESSAGE = MESSAGE + 'sitting by the fire.'
 
-print(message)
+print MESSAGE
