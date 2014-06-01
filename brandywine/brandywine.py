@@ -8,13 +8,16 @@ http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
 local environment variable.
 """
 import urllib2
+import json
 
 class BrandyWine(object):
     """
     Class definition for BrandyWine
     """
-    API_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/' \
+    LIST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/' \
                + 'movies.json?apikey='
+    MOVIES_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/' \
+               + 'movies/box_office.json?apikey='
 
     def __init__(self, key):
         """ Constructor """
@@ -30,11 +33,17 @@ class BrandyWine(object):
         """
         return self.key
 
-    def get_api_url(self):
+    def get_list_url(self):
         """
-        return the full URL used with the ROTTEN TOMATOES API
+        return the LIST URL used with the ROTTEN TOMATOES API
         """
-        return str(self.API_URL) + str(self.key)
+        return str(self.LIST_URL) + str(self.key)
+
+    def get_movies_url(self):
+        """
+        return the MOVIES URL used with the ROTTEN TOMATOES API
+        """
+        return str(self.MOVIES_URL) + str(self.key)
 
     def movie_search(self, title):
         """
@@ -42,14 +51,18 @@ class BrandyWine(object):
         """
         pass
 
-    def get_lists(self):
+    def return_list_directory_json(self):
         """
         returns the URLs in JSON for the list directories
         """
-        pass
+        response = urllib2.urlopen(self.get_list_url())
+        jsdata = json.load(response)
+        return jsdata
 
-    def get_movie_lists(self):
+    def return_movies_list_json(self):
         """
         returns the URLs in JSON for the movie list directories
         """
-        pass
+        response = urllib2.urlopen(self.get_movies_url())
+        jsdata = json.load(response)
+        return jsdata

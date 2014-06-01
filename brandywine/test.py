@@ -4,7 +4,12 @@
 import os
 from brandywine import *
 
-brwine = BrandyWine(os.environ.get('ROTTEN_API_KEY'))
-url = brwine.getApiUrl()
+# create the brandywine object
+brw = BrandyWine(os.environ.get('ROTTEN_API_KEY'))
 
-print url
+# return the list directory json
+jsonlist = brw.return_list_directory_json()
+print jsonlist
+
+movieslist = brw.return_movies_list_json()
+print movieslist
