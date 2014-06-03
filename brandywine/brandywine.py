@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Brandywine is cool.
+Brandywine is cool. It allows you to fetch movie reviews right from the command
+line.
 
 To register for the Rotten Tomatoes API, visit
 http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
