@@ -18,11 +18,11 @@ while CONT != 'n':
     print 'Enter the second number: '
     num2 = int(input())
     print 'Enter operation: '
-    op = str(input())
+    op = input()
     if op == '/' and num2 == 0:
         print 'Cannot divide by zero.'
         continue
     else:
-        print calc(num1, num2, op)
+        print str(calc(num1, num2, op))
     print 'Do you want to continue (y/n) '
     CONT = input()
