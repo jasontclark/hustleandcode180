@@ -7,17 +7,15 @@ To register for the Rotten Tomatoes API, visit
 http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
 local environment variable.
 """
-import urllib2
-import json
+import urllib2, json
 
 class BrandyWine(object):
     """
     Class definition for BrandyWine
     """
-    LIST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/' \
-               + 'movies.json?apikey='
-    MOVIES_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/' \
-               + 'movies/box_office.json?apikey='
+    BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
+    LISTS_URL = BASE_URL + 'movies.json?apikey='
+    MOVIES_URL = BASE_URL + 'movies/box_office.json?apikey='
 
     def __init__(self, key):
         """ Constructor """
@@ -37,7 +35,7 @@ class BrandyWine(object):
         """
         return the LIST URL used with the ROTTEN TOMATOES API
         """
-        return str(self.LIST_URL) + str(self.key)
+        return str(self.LISTS_URL) + str(self.key)
 
     def get_movies_url(self):
         """
@@ -61,7 +59,7 @@ class BrandyWine(object):
 
     def return_movies_list_json(self):
         """
-        returns the URLs in JSON for the movie list directories
+        returns the movies in JSON for the movie list directories
         """
         response = urllib2.urlopen(self.get_movies_url())
         jsdata = json.load(response)

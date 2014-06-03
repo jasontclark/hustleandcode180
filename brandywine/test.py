@@ -12,4 +12,6 @@ jsonlist = brw.return_list_directory_json()
 print jsonlist
 
 movieslist = brw.return_movies_list_json()
-print movieslist
+
+for movie in movieslist['movies']:
+    print movie['title']
