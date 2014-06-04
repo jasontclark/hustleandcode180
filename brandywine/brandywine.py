@@ -15,16 +15,10 @@ class BrandyWine(object):
     Class definition for BrandyWine
     """
     BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
-    LISTS_URL = BASE_URL + 'movies.json?apikey='
-    MOVIES_URL = BASE_URL + 'movies/box_office.json?apikey='
 
     def __init__(self, key):
         """ Constructor """
         self.key = key
-
-    def __str__(self):
-        """ Print method """
-        return str(self.key)
 
     def get_api_key(self):
         """
@@ -32,23 +26,34 @@ class BrandyWine(object):
         """
         return self.key
 
-    def get_list_url(self):
+    def get_listdir_url(self):
         """
         return the LIST URL used with the ROTTEN TOMATOES API
         """
-        return str(self.LISTS_URL) + str(self.key)
+        return self.BASE_URL + '%s.json' % 'movies' + \
+               '?apikey=%s' % str(self.key)
 
-    def get_movies_url(self):
+    def get_boxoffice_url(self):
         """
-        return the MOVIES URL used with the ROTTEN TOMATOES API
+        return the BOX OFFICE URL used with the ROTTEN TOMATOES API
         """
-        return str(self.MOVIES_URL) + str(self.key)
+        return self.BASE_URL + 'movies/%s.json' % 'box_office' + \
+               '?apikey=%s' % str(self.key)
 
-    def movie_search(self, title):
+    def get_intheatres_url(self):
         """
-        performs a search for movies by name
+        return the IN THEATRES URL used with the ROTTEN TOMATOES API
         """
-        pass
+        return self.BASE_URL + 'movies/%s.json' % 'in_theatres' + \
+               '?apikey=%s' % str(self.key)
+
+    def get_opening_url(self):
+        return self.BASE_URL + 'movies/%s.json' % 'opening' + \
+               '?apikey=%s' % str(self.key)
+
+    def get_upcoming_url(self):
+        return self.BASE_URL + 'movies/%s.json' % 'upcoming' + \
+               '?apikey=%s' % str(self.key)
 
     def return_list_directory_json(self):
         """
@@ -58,10 +63,30 @@ class BrandyWine(object):
         jsdata = json.load(response)
         return jsdata
 
-    def return_movies_list_json(self):
+    def fetch_box_office_titles(self):
         """
-        returns the movies in JSON for the movie list directories
+        returns (array) the box office movie titles
         """
-        response = urllib2.urlopen(self.get_movies_url())
-        jsdata = json.load(response)
-        return jsdata
+        movies = []
+        response = urllib2.urlopen(self.get_boxoffice_url())
+        jsondata = json.load(response)
+
+        for movie in jsondata['movies']:
+            movies.append(movie['title'])
+
+        # Remove unicode
+        movieTitles = [title.encode('utf-8') for title in movies]
+
+        return movieTitles
+
+    def fetch_intheatres_titles(self):
+        """
+        returns (array) the in theatres movie titles
+        """
+        pass
+
+    def movie_search(self, title):
+        """
+        performs a search for movies by name
+        """
+        pass
