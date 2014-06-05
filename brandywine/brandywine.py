@@ -83,7 +83,18 @@ class BrandyWine(object):
         """
         returns (array) the in theatres movie titles
         """
-        pass
+        print self.get_intheatres_url()
+        movies = []
+        response = urllib2.urlopen(self.get_intheatres_url())
+        jsondata = json.load(response)
+
+        for movie in jsondata['movies']:
+            movies.append(movie['title'])
+
+        # Remove unicode
+        movieTitles = [title.encode('utf-8') for title in movies]
+
+        return movieTitles
 
     def movie_search(self, title):
         """
