@@ -17,11 +17,15 @@ brw = BrandyWine(os.environ.get('ROTTEN_API_KEY'))
 
 # fetch box office titles
 boxOfficeTitles = brw.fetch_box_office_titles()
-print boxOfficeTitles
+for title in boxOfficeTitles:
+  print title
+
+print '\n'
 
 # fetch in theatres titles
-inTheatresTitles = brw.fetch_intheatres_titles()
-print inTheatresTitles
+inTheatersTitles = brw.fetch_intheaters_titles()
+for title in inTheatersTitles:
+  print title
 
 # return the list directory json
 #jsonlist = brw.return_list_directory_json()

@@ -40,11 +40,11 @@ class BrandyWine(object):
         return self.BASE_URL + 'movies/%s.json' % 'box_office' + \
                '?apikey=%s' % str(self.key)
 
-    def get_intheatres_url(self):
+    def get_intheaters_url(self):
         """
-        return the IN THEATRES URL used with the ROTTEN TOMATOES API
+        return the IN theaters URL used with the ROTTEN TOMATOES API
         """
-        return self.BASE_URL + 'movies/%s.json' % 'in_theatres' + \
+        return self.BASE_URL + 'movies/%s.json' % 'in_theaters' + \
                '?apikey=%s' % str(self.key)
 
     def get_opening_url(self):
@@ -79,13 +79,12 @@ class BrandyWine(object):
 
         return movieTitles
 
-    def fetch_intheatres_titles(self):
+    def fetch_intheaters_titles(self):
         """
-        returns (array) the in theatres movie titles
+        returns (array) the in theaters movie titles
         """
-        print self.get_intheatres_url()
         movies = []
-        response = urllib2.urlopen(self.get_intheatres_url())
+        response = urllib2.urlopen(self.get_intheaters_url())
         jsondata = json.load(response)
 
         for movie in jsondata['movies']:
