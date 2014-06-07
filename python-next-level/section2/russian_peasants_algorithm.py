@@ -1,19 +1,38 @@
 #!/usr/bin/env python
 """ Russian Peasant's Algorithm """
+import time
+
+CACHE = {}
 
 def russian(num1, num2):
-    x = num1; y = num2
-    z = 0
+    key = (num1, num2)
 
-    while x > 0:
-        if x % 2 == 1:
-            z = z + y
+    if key in CACHE:
+        z = CACHE[key]
+    else:
+        print 'Not in Cache'
+        x = num1; y = num2    ## Compound Assignment
+        z = 0                 ## Acumulator
 
-        # Binary Shifting: << shifts left, >> shifts right
-        y = y << 1
-        x = x >> 1
+        while x > 0:          ## While Loop Begins
+            if x % 2 == 1:    ## Modulo operator
+                z = z + y     ## Acumulate Sum
+            y = y << 1        ## Shift Binary Left
+            x = x >> 1        ## Shift Binary Right
 
-    return z
+        CACHE[key] = z
+        return z              ## Return Z
 
-print russian(24,16)
-print russian(357,16)
+def test_russian():
+    start_time = time.time()
+    print russian(357, 16)
+    print 'Russian Algorithm took %f seconds' % (time.time() - start_time)
+
+    start_time = time.time()
+    print russian(357, 16)
+    print 'Russian Algorithm took %f seconds' % (time.time() - start_time)
+
+    #assert russian(357, 16) == 5712
+    
+test_russian()
+#print CACHE
