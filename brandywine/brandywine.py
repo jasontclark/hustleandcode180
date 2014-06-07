@@ -14,6 +14,8 @@ class BrandyWine(object):
     """
     Class definition for BrandyWine
     """
+    global RESPONSE
+
     BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
 
     def __init__(self, key):
@@ -100,3 +102,22 @@ class BrandyWine(object):
         performs a search for movies by name
         """
         pass
+
+    def fetch_data(self, **kwargs):
+        """
+        a better way to fetch the json data from rotten tomatoes api
+        """
+        global RESPONSE
+
+        for key in kwargs.keys():
+          if kwargs['category'] == 'movies':
+              url = self.BASE_URL + '%s.json?apikey=%s' % \
+              ('movies', str(self.key))
+          else:
+              url = self.BASE_URL + 'movies/%s.json?apikey=%s' % \
+              (kwargs['category'], str(self.key))
+
+        RESPONSE = json.load(urllib2.urlopen(url))
+
+        print url
+        print RESPONSE
