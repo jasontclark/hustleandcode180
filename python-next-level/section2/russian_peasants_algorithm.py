@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 """ Russian Peasant's Algorithm """
 
-# Input two numbers
-print 'Enter first number: '
-num1 = int(input())
-
-print 'Enter second number: '
-num2 = int(input())
-
 def russian(num1, num2):
-    if num1 > 1:
-          num1 = num1 / 2
-          num2 = num2 * 2
-          print str(num1) + ' ' + str(num2)
+    x = num1; y = num2
+    z = 0
 
-    russian(num1, num2)
+    while x > 0:
+        if x % 2 == 1:
+            z = z + y
+
+        # Binary Shifting: << shifts left, >> shifts right
+        y = y << 1
+        x = x >> 1
+
+    return z
+
+print russian(24,16)
+print russian(357,16)
