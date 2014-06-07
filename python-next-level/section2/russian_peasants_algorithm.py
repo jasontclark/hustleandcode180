@@ -21,7 +21,8 @@ def russian(num1, num2):
             x = x >> 1        ## Shift Binary Right
 
         CACHE[key] = z
-        return z              ## Return Z
+
+    return z              ## Return Z
 
 def test_russian():
     start_time = time.time()
@@ -32,7 +33,7 @@ def test_russian():
     print russian(357, 16)
     print 'Russian Algorithm took %f seconds' % (time.time() - start_time)
 
-    #assert russian(357, 16) == 5712
-    
+    assert russian(357, 16) == 5712
+
 test_russian()
 #print CACHE
