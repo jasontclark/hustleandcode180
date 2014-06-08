@@ -7,11 +7,11 @@ from brandywine import *
 # create the brandywine object
 brw = BrandyWine(os.environ.get('ROTTEN_API_KEY'))
 
-brw.fetch_data(category='movies')
-brw.fetch_data(category='box_office')
-brw.fetch_data(category='in_theaters')
-brw.fetch_data(category='opening')
-brw.fetch_data(category='upcoming')
+#brw.fetch_data(category='movies')
+#brw.fetch_data(category='box_office')
+#brw.fetch_data(category='in_theaters')
+#brw.fetch_data(category='opening')
+#brw.fetch_data(category='upcoming')
 
 # fetch endpoint urls
 #print brw.get_listdir_url()
@@ -21,16 +21,18 @@ brw.fetch_data(category='upcoming')
 #print brw.get_upcoming_url()
 
 # fetch box office titles
-#boxOfficeTitles = brw.fetch_box_office_titles()
-#for title in boxOfficeTitles:
-#  print title
+print 'Box Office Titles: '
+boxOfficeTitles = brw.fetch_box_office_titles()
+for title in boxOfficeTitles:
+  print title
 
-#print '\n'
+print '\n'
 
 # fetch in theatres titles
-#inTheatersTitles = brw.fetch_intheaters_titles()
-#for title in inTheatersTitles:
-#  print title
+print 'In Theaters Titles: '
+inTheatersTitles = brw.fetch_intheaters_titles()
+for title in inTheatersTitles:
+  print title
 
 # return the list directory json
 #jsonlist = brw.return_list_directory_json()
