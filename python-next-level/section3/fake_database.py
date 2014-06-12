@@ -20,5 +20,5 @@ def test_russian():
 
     assert russian(357, 16) == 5712
 
-if __name__ ="__main__":
+if __name__ == "__main__":
     test_russian()

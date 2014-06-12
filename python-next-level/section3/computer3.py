@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" section 3 - computer1 simulation code """
+""" section 3 - computer3 simulation code """
 import fake_database
 
 CACHE = {}
