@@ -15,6 +15,7 @@ class BrandyWine(object):
     Class definition for BrandyWine
     """
     BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
+    MOVIE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/movies/'
 
     def __init__(self, key):
         """ Constructor """
@@ -43,6 +44,7 @@ class BrandyWine(object):
 
         for movie in jsondata['movies']:
             movies.append('==> ' + movie['title'] + \
+                ', ID: ' + str(movie['id']) + \
                 ', Rating: ' + str(movie['ratings']['critics_rating']) + \
                 ', Score: ' + str(movie['ratings']['critics_score']))
 
@@ -60,6 +62,7 @@ class BrandyWine(object):
 
         for movie in jsondata['movies']:
             movies.append('==> ' + movie['title'] + \
+                ', ID: ' + str(movie['id']) + \
                 ', Rating: ' + str(movie['ratings']['critics_rating']) + \
                 ', Score: ' + str(movie['ratings']['critics_score']))
 
@@ -73,6 +76,14 @@ class BrandyWine(object):
         performs a search for movies by name
         """
         pass
+
+    def fetch_movie_data(self, id):
+        """
+        returns all information about the requested movie
+        """
+        url = self.MOVIE_URL + '%s.json?apikey=%s' % (id, str(self.key))
+
+        return json.load(urllib2.urlopen(url))
 
     def fetch_data(self, **kwargs):
         """

@@ -32,7 +32,9 @@ print '\n'
 print 'In Theaters Titles: '
 inTheatersTitles = brw.fetch_intheaters_titles()
 for title in inTheatersTitles:
-  print title  
+  print title
+
+brw.fetch_movie_data('771317257')
 
 # return the list directory json
 #jsonlist = brw.return_list_directory_json()
