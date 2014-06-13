@@ -109,5 +109,6 @@ if __name__ == '__main__':
         action='store_true', help='lists current box office movies.')
     parser.add_argument('-t', '--intheaters', \
         action='store_true', help='lists movies currently in theaters.')
-    parser.add_argument('s', '--search', help='search for a movie')
+    parser.add_argument('-s', '--search', \
+        metavar='movie', help='query the movie database')
     args = parser.parse_args()
