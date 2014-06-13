@@ -9,6 +9,7 @@ http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
 local environment variable.
 """
 import urllib2, json
+import argparse
 
 class BrandyWine(object):
     """
@@ -98,3 +99,14 @@ class BrandyWine(object):
                 (kwargs['category'], str(self.key))
 
         return json.load(urllib2.urlopen(url))
+
+    def test_arg():
+        print 'Test passed.'
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
+    parser.add_argument('-b', '--boxoffice', \
+        action='store_true', help='lists current box office movies.')
+    parser.add_argument('-t', '--intheaters', \
+        action='store_true', help='lists movies currently in theaters.')
+    args = parser.parse_args()
