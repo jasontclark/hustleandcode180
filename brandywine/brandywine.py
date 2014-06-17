@@ -100,9 +100,6 @@ class BrandyWine(object):
 
         return json.load(urllib2.urlopen(url))
 
-    def test_arg():
-        print 'Test passed.'
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
     parser.add_argument('-b', '--boxoffice', \
