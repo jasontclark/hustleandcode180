@@ -8,6 +8,7 @@ To register for the Rotten Tomatoes API, visit
 http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
 local environment variable.
 """
+import os
 import urllib2, json
 import argparse
 
@@ -18,9 +19,16 @@ class BrandyWine(object):
     BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
     MOVIE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/movies/'
 
-    def __init__(self, key):
+    def __init__(self, options):
         """ Constructor """
-        self.key = key
+        self.key = os.environ.get('ROTTEN_API_KEY')
+        self.options = options
+
+        if options['boxoffice'] == True:
+            self.fetch_box_office_titles()
+
+        if options['intheaters'] == True:
+            self.fetch_intheaters_titles()
 
     def get_api_key(self):
         """
@@ -52,7 +60,8 @@ class BrandyWine(object):
         # Remove unicode
         movie_titles = [title.encode('utf-8') for title in movies]
 
-        return movie_titles
+        for movie in movie_titles:
+            print movie
 
     def fetch_intheaters_titles(self):
         """
@@ -70,7 +79,8 @@ class BrandyWine(object):
         # Remove unicode
         movie_titles = [title.encode('utf-8') for title in movies]
 
-        return movie_titles
+        for movie in movie_titles:
+            print movie
 
     def movie_search(self, title):
         """
@@ -78,11 +88,11 @@ class BrandyWine(object):
         """
         pass
 
-    def fetch_movie_data(self, id):
+    def fetch_movie_data(self, movie_id):
         """
         returns all information about the requested movie
         """
-        url = self.MOVIE_URL + '%s.json?apikey=%s' % (id, str(self.key))
+        url = self.MOVIE_URL + '%s.json?apikey=%s' % (movie_id, str(self.key))
 
         return json.load(urllib2.urlopen(url))
 
@@ -109,3 +119,4 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--search', \
         metavar='movie', help='query the movie database')
     args = parser.parse_args()
+    brw = BrandyWine(vars(args))
