@@ -30,6 +30,9 @@ class BrandyWine(object):
         if options['intheaters'] == True:
             self.fetch_intheaters_titles()
 
+        if options['search'] != None:
+            self.movie_search(options['search'])
+
     def get_api_key(self):
         """
         returns the value of your ROTTEN TOMATOES API KEY
@@ -86,7 +89,7 @@ class BrandyWine(object):
         """
         performs a search for movies by name
         """
-        pass
+        print 'You searched for: %s' % title
 
     def fetch_movie_data(self, movie_id):
         """
