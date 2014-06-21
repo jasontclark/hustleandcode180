@@ -89,7 +89,8 @@ class BrandyWine(object):
         """
         performs a search for movies by name
         """
-        print 'You searched for: %s' % title
+        results = []
+        jsondata = self.fetch_data(category='search', query=title)
 
     def fetch_movie_data(self, movie_id):
         """
@@ -107,6 +108,9 @@ class BrandyWine(object):
             if kwargs['category'] == 'movies':
                 url = self.BASE_URL + '%s.json?apikey=%s' % \
                 ('movies', str(self.key))
+            elif kwargs['category'] == 'search':
+                url = self.BASE_URL + 'movies/%s.json?apikey=%s&q=%s' % \
+                (kwargs['category'], str(self.key), kwargs['query'])
             else:
                 url = self.BASE_URL + 'movies/%s.json?apikey=%s' % \
                 (kwargs['category'], str(self.key))
