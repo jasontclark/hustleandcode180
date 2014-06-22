@@ -52,39 +52,15 @@ class BrandyWine(object):
         """
         returns (array) the box office movie titles
         """
-        movies = []
         jsondata = self.fetch_data(category='box_office')
-
-        for movie in jsondata['movies']:
-            movies.append('==> ' + movie['title'] + \
-                ', ID: ' + str(movie['id']) + \
-                ', Rating: ' + str(movie['ratings']['critics_rating']) + \
-                ', Score: ' + str(movie['ratings']['critics_score']))
-
-        # Remove unicode
-        movie_titles = [title.encode('utf-8') for title in movies]
-
-        for movie in movie_titles:
-            print movie
+        self.format_json_response(jsondata)
 
     def fetch_intheaters_titles(self):
         """
         returns (array) the in theaters movie titles
         """
-        movies = []
         jsondata = self.fetch_data(category='in_theaters')
-
-        for movie in jsondata['movies']:
-            movies.append('==> ' + movie['title'] + \
-                ', ID: ' + str(movie['id']) + \
-                ', Rating: ' + str(movie['ratings']['critics_rating']) + \
-                ', Score: ' + str(movie['ratings']['critics_score']))
-
-        # Remove unicode
-        movie_titles = [title.encode('utf-8') for title in movies]
-
-        for movie in movie_titles:
-            print movie
+        self.format_json_response(jsondata)
 
     def movie_search(self, title):
         """
@@ -121,6 +97,23 @@ class BrandyWine(object):
                 (kwargs['category'], str(self.key))
 
         return json.load(urllib2.urlopen(url))
+
+    def format_json_response(self, response, type='title'):
+
+        movies = []
+        for movie in response['movies']:
+            movies.append('==> ' + movie['title'] + \
+                ', ID: ' + str(movie['id']) + \
+                ', Rating: ' + str(movie['ratings']['critics_rating']) + \
+                ', Score: ' + str(movie['ratings']['critics_score']))
+
+        # Remove unicode
+        movie_titles = [title.encode('utf-8') for title in movies]
+
+        for movie in movie_titles:
+            print movie
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
