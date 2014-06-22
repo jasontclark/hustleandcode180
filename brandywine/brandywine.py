@@ -113,8 +113,6 @@ class BrandyWine(object):
         for movie in movie_titles:
             print movie
 
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
     parser.add_argument('-b', '--boxoffice', \
