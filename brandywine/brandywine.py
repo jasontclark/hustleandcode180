@@ -5,8 +5,7 @@ Brandywine is cool. It allows you to fetch movie reviews right from the command
 line.
 
 To register for the Rotten Tomatoes API, visit
-http://developer.rottentomates.com/.  Be sure to set the ROTTEN_API_KEY as a
-local environment variable.
+http://developer.rottentomates.com/.  Be sure to set a local environment variable called ROTTEN_API_KEY to the application key generated for you after regstering.
 """
 import os
 import urllib2, json
