@@ -50,17 +50,17 @@ class BrandyWine(object):
 
     def fetch_box_office_titles(self):
         """
-        returns (array) the box office movie titles
+        passes json data about box office movies
         """
         jsondata = self.fetch_data(category='box_office')
-        self.format_json_response(jsondata)
+        self.format_json_response(jsondata, infotype='title')
 
     def fetch_intheaters_titles(self):
         """
-        returns (array) the in theaters movie titles
+        passes json data about in theaters movies
         """
         jsondata = self.fetch_data(category='in_theaters')
-        self.format_json_response(jsondata)
+        self.format_json_response(jsondata, infotype='title')
 
     def movie_search(self, title):
         """
@@ -68,10 +68,11 @@ class BrandyWine(object):
         """
         results = []
         jsondata = self.fetch_data(category='search', query=title)
+        self.format_json_response(jsondata)
 
-        for movie in jsondata['movies']:
+        """ for movie in jsondata['movies']:
           for entry in movie:
-              print entry.encode('utf-8') + ': ' + str(movie[entry])
+              print entry.encode('utf-8') + ': ' + str(movie[entry]) """
 
     def fetch_movie_data(self, movie_id):
         """
@@ -98,20 +99,32 @@ class BrandyWine(object):
 
         return json.load(urllib2.urlopen(url))
 
-    def format_json_response(self, response, type='title'):
+    def format_json_response(self, response, infotype):
+        """
+        format the json response from the Rotten Tomatoes API call
+        """
+        if infotype == 'title':
+            movies = []
+            for movie in response['movies']:
+                movies.append('==> ' + movie['title'] + \
+                    ', ID: ' + str(movie['id']) + \
+                    ', Rating: ' + str(movie['ratings']['critics_rating']) + \
+                    ', Score: ' + str(movie['ratings']['critics_score']))
 
-        movies = []
-        for movie in response['movies']:
-            movies.append('==> ' + movie['title'] + \
-                ', ID: ' + str(movie['id']) + \
-                ', Rating: ' + str(movie['ratings']['critics_rating']) + \
-                ', Score: ' + str(movie['ratings']['critics_score']))
+            # Remove unicode
+            movie_titles = [title.encode('utf-8') for title in movies]
 
-        # Remove unicode
-        movie_titles = [title.encode('utf-8') for title in movies]
+            for movie in movie_titles:
+                print movie
+        elif infotype == 'score':
+            print 'you asked for a score'
+        else:
+            movies = []
+            for movie in response['movies']:
+                for entry in movie:
+                    print entry + ': ' + movie['entry']
 
-        for movie in movie_titles:
-            print movie
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
