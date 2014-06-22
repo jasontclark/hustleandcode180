@@ -67,7 +67,7 @@ class BrandyWine(object):
         """
         results = []
         jsondata = self.fetch_data(category='search', query=title)
-        self.format_json_response(jsondata)
+        self.format_json_response(jsondata, infotype='all')
 
         """ for movie in jsondata['movies']:
           for entry in movie:
@@ -112,16 +112,13 @@ class BrandyWine(object):
 
             # Remove unicode
             movie_titles = [title.encode('utf-8') for title in movies]
-
-            for movie in movie_titles:
-                print movie
+            for movie in movie_titles: print movie
         elif infotype == 'score':
             print 'you asked for a score'
         else:
-            movies = []
             for movie in response['movies']:
                 for entry in movie:
-                    print entry + ': ' + movie['entry']
+                    print entry + ': ' + str(movie[entry])
 
 
 
