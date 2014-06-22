@@ -18,6 +18,7 @@ class BrandyWine(object):
     """
     BASE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/'
     MOVIE_URL = 'http://api.rottentomatoes.com/api/public/v1.0/movies/'
+    SEARCH_URL = 'http://api.rottentomatoes.com/api/public/v1.0/'
 
     def __init__(self, options):
         """ Constructor """
@@ -92,6 +93,10 @@ class BrandyWine(object):
         results = []
         jsondata = self.fetch_data(category='search', query=title)
 
+        for movie in jsondata['movies']:
+          for entry in movie:
+              print entry.encode('utf-8') + ': ' + str(movie[entry])
+
     def fetch_movie_data(self, movie_id):
         """
         returns all information about the requested movie
@@ -109,8 +114,8 @@ class BrandyWine(object):
                 url = self.BASE_URL + '%s.json?apikey=%s' % \
                 ('movies', str(self.key))
             elif kwargs['category'] == 'search':
-                url = self.BASE_URL + 'movies/%s.json?apikey=%s&q=%s' % \
-                (kwargs['category'], str(self.key), kwargs['query'])
+                url = self.SEARCH_URL + '%s.json?apikey=%s&q=%s' % \
+                ('movies', str(self.key), kwargs['query'])
             else:
                 url = self.BASE_URL + 'movies/%s.json?apikey=%s' % \
                 (kwargs['category'], str(self.key))
