@@ -114,7 +114,10 @@ class BrandyWine(object):
             movie_titles = [title.encode('utf-8') for title in movies]
             for movie in movie_titles: print movie
         elif infotype == 'score':
-            print 'you asked for a score'
+            movies = []
+            for movie in response['movies']:
+                movies.append('==>' + movie['title'])
+            print movies
         else:
             for movie in response['movies']:
                 for entry in movie:
