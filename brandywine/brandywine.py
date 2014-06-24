@@ -67,7 +67,7 @@ class BrandyWine(object):
         """
         results = []
         jsondata = self.fetch_data(category='search', query=title)
-        self.format_json_response(jsondata, infotype='all')
+        self.format_json_response(jsondata, infotype='score')
 
         """ for movie in jsondata['movies']:
           for entry in movie:
@@ -116,14 +116,14 @@ class BrandyWine(object):
         elif infotype == 'score':
             movies = []
             for movie in response['movies']:
-                movies.append('==>' + movie['title'])
-            print movies
+                movies.append('==> ' + str(movie['title']) + ', Score: ' + \
+                    str(movie['ratings']['critics_score']))
+            for mov in movies:
+                print mov
         else:
             for movie in response['movies']:
                 for entry in movie:
                     print entry + ': ' + str(movie[entry])
-
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Rotten Tomatoes cli')
