@@ -68,11 +68,7 @@ class BrandyWine(object):
         results = []
         jsondata = self.fetch_data(category='search', query=title)
         self.format_json_response(jsondata, infotype='score')
-
-        """ for movie in jsondata['movies']:
-          for entry in movie:
-              print entry.encode('utf-8') + ': ' + str(movie[entry]) """
-
+        
     def fetch_movie_data(self, movie_id):
         """
         returns all information about the requested movie
