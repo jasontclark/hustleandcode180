@@ -4,12 +4,14 @@ SERVERS = ['APP1', 'APP2', 'APP3']
 
 n = -1
 
-def get_server():
-    global n
-    n += 1
-    print SERVERS[n % len(SERVERS)]
+# def get_server():
+#     global n
+#     n += 1
+#     print SERVERS[n % len(SERVERS)]
 
-
+import itertools
+## infinite loop iterator
+cycle = itertools.cycle(SERVERS)
 num = 10
 
 for i in num:
