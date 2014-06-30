@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 """ section 3 - computer1 simulation code """
 import fake_database
+from memcache import Memcache
 
-CACHE = {}
+#CACHE = {}
+
+cache = Memcache()
 
 def print_name():
     print str(__name__)

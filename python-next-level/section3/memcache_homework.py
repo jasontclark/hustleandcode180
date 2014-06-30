@@ -2,11 +2,11 @@
 """ memcache_homework.py - section 3 homework """
 class Memcache(object):
 
-    #CACHE = {}
+    MEMORY = {}
 
     def __init__(self):
-        #global CACHE
-        self.CACHE = {}
+        global MEMORY
+        self.CACHE = MEMORY
 
     def set(self, key, value):
         self.CACHE[key] = value
