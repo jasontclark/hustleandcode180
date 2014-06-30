@@ -13,15 +13,7 @@ SERVERS = ['APP1', 'APP2', 'APP3']
 # cycle = itertools.cycle(SERVERS)
 # def get_server():
 #     global cycle
-#     return cycle.next()
-
-def get_server():
-    def f():
-        while True:
-            i = SERVERS.pop(0)
-            SERVERS.append(i)
-            yield i
-    return next(f())
+#     return cycle.next
 
 # def get_server()
 #     try:
@@ -31,6 +23,13 @@ def get_server():
 #         return next(get_server.s)
 # setattr(get_server, 's', iter(SERVERS))
 
+def get_server():
+    def f():
+        while True:
+            i = SERVERS.pop(0)
+            SERVERS.append(i)
+            yield i
+    return next(f())
 
 if __name__ == '__main__':
     for i in range(9):
