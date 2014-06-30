@@ -68,7 +68,7 @@ class BrandyWine(object):
         results = []
         jsondata = self.fetch_data(category='search', query=title)
         self.format_json_response(jsondata, infotype='score')
-        
+
     def fetch_movie_data(self, movie_id):
         """
         returns all information about the requested movie
@@ -129,5 +129,6 @@ if __name__ == '__main__':
         action='store_true', help='lists movies currently in theaters.')
     parser.add_argument('-s', '--search', \
         metavar='movie', help='query the movie database')
+    # TODO: Need to add subparsers for each argument
     args = parser.parse_args()
     brw = BrandyWine(vars(args))
