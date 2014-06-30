@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 """ load_balancer.py - simulated load balancer """
-SERVERS = ['APP1', 'APP2', 'APP3']
+import computer1
+import computer2
+import computer3
+
+SERVERS = [computer1, computer2, computer3]
 # SERVERS = ['APP1', 'APP2', 'APP3', 'APP4', 'APP5', 'APP6', 'APP7']
 
 # n = -1
@@ -32,5 +36,14 @@ def get_server():
     return next(f())
 
 if __name__ == '__main__':
-    for i in range(9):
-        print get_server()
+    from random import randint
+    for i in range(10):
+        a = randint(5,99)
+        b = randint(5,99)
+
+        server = get_server()
+
+        print server.print_name()
+        print server.multiply_handler(a,b)
+        print server.last_multiplied_handler()
+        print ' '
