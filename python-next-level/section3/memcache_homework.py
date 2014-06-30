@@ -1,32 +1,38 @@
+#!/usr/bin/env python
+""" memcache_homework.py - section 3 homework """
+class Memcache(object):
 
+    #CACHE = {}
 
-class Memcache(self):
     def __init__(self):
+        #global CACHE
         self.CACHE = {}
 
     def set(self, key, value):
-        pass
+        self.CACHE[key] = value
+        return True
 
-    def get(set, key):
-        pass
+    def get(self, key):
+        return self.CACHE.get(key)
 
     def delete(self, key):
-        pass
+        if key in self.CACHE:
+            del self.CACHE[key]
 
     def flush(self):
-        pass
+        self.CACHE.clear()
 
-    def test_memcache():
-        m = Memcache()
-        print m.set('a', '1')
-        print m.set('b', '2')
-        print m.CACHE
-        print m.get('b')
-        print m.get('c')
-        m.delete('b')
-        print m.CACHE
-        m.flush()
-        print m.CACHE
+def test_memcache():
+    m = Memcache()
+    print m.set('a', '1')
+    print m.set('b', '2')
+    print m.CACHE
+    print m.get('b')
+    print m.get('c')
+    m.delete('b')
+    print m.CACHE
+    m.flush()
+    print m.CACHE
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     test_memcache()
