@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+""" string_translate_intro.py - encode/decode example, section 4 """
 import string
 
 enc_table = string.maketrans('ABCDEF', '123456')
