@@ -11,5 +11,6 @@ def test_noFirstZero(L):
     for formula in L:
         print formula, noFirstZero(formula)
 
+""" Test """
 L = ['123', '406', '023', '543 0543', '087 65', '00', '432 123']
 test_noFirstZero(L)
