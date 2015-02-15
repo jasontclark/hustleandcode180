@@ -11,7 +11,6 @@ import scrapy
 class ScCrawlerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field()
+    artist_name = scrapy.Field()
+    mixtape_title = scrapy.Field()
     link = scrapy.Field()
-    desc = scrapy.Field()
- 
